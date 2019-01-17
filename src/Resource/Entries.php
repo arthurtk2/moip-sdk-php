@@ -68,7 +68,7 @@ class Entries extends MoipResource
      */
     public function getEntries()
     {
-        return $this->getByPath(sprintf('/%s/%s/%s/', MoipResource::VERSION, self::PATH));
+        return $this->getByPath(sprintf('/%s/%s/', MoipResource::VERSION, self::PATH));
     }
 
     /**
