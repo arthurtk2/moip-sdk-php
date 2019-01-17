@@ -7,7 +7,7 @@ use stdClass;
 /**
  * Class Entry.
  */
-class Entry extends MoipResource
+class Entries extends MoipResource
 {
     /**
      * @const string
@@ -30,7 +30,7 @@ class Entry extends MoipResource
      *
      * @param \stdClass $response
      *
-     * @return Entry Entry information.
+     * @return Entries Entry information.
      */
     protected function populate(stdClass $response)
     {
@@ -59,6 +59,16 @@ class Entry extends MoipResource
         }
 
         return $entry;
+    }
+
+    /**
+     * Returns entries.
+     *
+     * @return stdClass
+     */
+    public function getEntries()
+    {
+        return $this->getByPath(sprintf('/%s/%s/%s/', MoipResource::VERSION, self::PATH));
     }
 
     /**

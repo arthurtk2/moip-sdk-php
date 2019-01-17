@@ -7,7 +7,7 @@ use Moip\Resource\Account;
 use Moip\Resource\Balances;
 use Moip\Resource\BankAccount;
 use Moip\Resource\Customer;
-use Moip\Resource\Entry;
+use Moip\Resource\Entries;
 use Moip\Resource\Holder;
 use Moip\Resource\Keys;
 use Moip\Resource\Multiorders;
@@ -155,11 +155,11 @@ class Moip
     /**
      * Create a new Entry instance.
      *
-     * @return \Moip\Resource\Entry
+     * @return \Moip\Resource\Entries
      */
     public function entries()
     {
-        return new Entry($this);
+        return new Entries($this);
     }
 
     /**

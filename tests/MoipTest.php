@@ -37,7 +37,7 @@ class MoipTest extends TestCase
      */
     public function testShouldReceiveInstanceOfEntry()
     {
-        $entry = new \Moip\Resource\Entry($this->moip);
+        $entry = new \Moip\Resource\Entries($this->moip);
 
         $this->assertEquals($entry, $this->moip->entries());
     }

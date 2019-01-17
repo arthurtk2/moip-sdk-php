@@ -162,7 +162,7 @@ class Orders extends MoipResource
         $this->orders->data->payments = $this->structure($response, Payment::PATH, Payment::class);
         $this->orders->data->escrows = $this->structure($response, Payment::PATH, Escrow::class);
         $this->orders->data->refunds = $this->structure($response, Refund::PATH, Refund::class);
-        $this->orders->data->entries = $this->structure($response, Entry::PATH, Entry::class);
+        $this->orders->data->entries = $this->structure($response, Entries::PATH, Entries::class);
         $this->orders->data->events = $this->structure($response, Event::PATH, Event::class);
 
         $this->orders->data->receivers = $this->getIfSet('receivers', $response);
@@ -178,7 +178,7 @@ class Orders extends MoipResource
      *
      * @param stdClass                                                                               $response
      * @param string                                                                                 $resource
-     * @param \Moip\Resource\Payment|\Moip\Resource\Refund|\Moip\Resource\Entry|\Moip\Resource\Event $class
+     * @param \Moip\Resource\Payment|\Moip\Resource\Refund|\Moip\Resource\Entries|\Moip\Resource\Event $class
      *
      * @return array
      */
