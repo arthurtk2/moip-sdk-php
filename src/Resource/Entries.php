@@ -30,7 +30,7 @@ class Entries extends MoipResource
      *
      * @param \stdClass $response
      *
-     * @return Entries Entry information.
+     * @return Entry Entry information.
      */
     protected function populate(stdClass $response)
     {
@@ -62,13 +62,15 @@ class Entries extends MoipResource
     }
 
     /**
-     * Returns entries.
+     * Create a new Entries list instance.
      *
-     * @return stdClass
+     * @return \Moip\Resource\EntriesList
      */
-    public function getEntries()
+    public function getList(Pagination $pagination = null, Filters $filters = null, $qParam = '')
     {
-        return $this->getByPath(sprintf('/%s/%s/', MoipResource::VERSION, self::PATH));
+        $entriesList = new EntriesList($this->moip);
+
+        return $entriesList->get($pagination, $filters, $qParam);
     }
 
     /**
