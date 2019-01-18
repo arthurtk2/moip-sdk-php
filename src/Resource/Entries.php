@@ -82,7 +82,19 @@ class Entries extends MoipResource
      */
     public function get($id_moip)
     {
-        return $this->getByPath(sprintf('/%s/%s/%s/', MoipResource::VERSION, self::PATH, $id_moip));
+        $headers['Accept'] = 'application/json;version=2.1';
+
+        return $this->getByPath(sprintf('/%s/%s/%s/', MoipResource::VERSION, self::PATH, $id_moip), $headers);
+    }
+
+    /**
+     * Get data from entry.
+     *
+     * @return string Event ID that generated the launch.
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**
