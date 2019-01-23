@@ -164,6 +164,7 @@ class Orders extends MoipResource
         $this->orders->data->refunds = $this->structure($response, Refund::PATH, Refund::class);
         $this->orders->data->entries = $this->structure($response, Entries::PATH, Entries::class);
         $this->orders->data->events = $this->structure($response, Event::PATH, Event::class);
+        $this->orders->data->shippingAddress = $response->shippingAddress;
 
         $this->orders->data->receivers = $this->getIfSet('receivers', $response);
 
@@ -204,6 +205,16 @@ class Orders extends MoipResource
     public function create()
     {
         return $this->createResource(sprintf('/%s/%s', MoipResource::VERSION, self::PATH));
+    }
+
+    /**
+     * Get an order data.
+     *
+     * @return stdClass
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**

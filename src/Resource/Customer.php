@@ -135,6 +135,16 @@ class Customer extends MoipResource
     }
 
     /**
+     * Get customer email.
+     *
+     * @return string The buyer email.
+     */
+    public function getEmail()
+    {
+        return $this->getIfSet('email');
+    }
+
+    /**
      * Get customer address.
      *
      * @return \stdClass Customer's address.

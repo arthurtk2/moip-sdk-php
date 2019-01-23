@@ -40,6 +40,10 @@ class Entries extends MoipResource
         $entry->data->status = $this->getIfSet('status', $response);
         $entry->data->operation = $this->getIfSet('operation', $response);
 
+        if (isset($response->_links)) {
+            $entry->data->_links = $response->_links;
+        }
+
         if (isset($response->amount)) {
             $entry->data->amount->total = $this->getIfSet('total', $response->amount);
             $entry->data->amount->fee = $this->getIfSet('fee', $response->amount);
