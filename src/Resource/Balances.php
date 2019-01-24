@@ -57,6 +57,16 @@ class Balances extends MoipResource
     }
 
     /**
+     * Get data
+     *
+     * @return stdClass
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
      * Get unavailable balances. Returns an array of objects with the amount and currency.
      *
      * @return array
