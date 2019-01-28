@@ -48,6 +48,10 @@ class TransfersList extends MoipResource
         return $this->getByPath($this->generateListPath($pagination, $filters, ['q' => $qParam]));
     }
 
+    public function getData(){
+        return $this->data;
+    }
+
     protected function populate(stdClass $response)
     {
         $transfersList = clone $this;
