@@ -4,6 +4,8 @@ namespace Moip;
 
 use Moip\Contracts\Authentication;
 use Moip\Resource\Account;
+use Moip\Resource\AnticipationEstimates;
+use Moip\Resource\Anticipations;
 use Moip\Resource\Balances;
 use Moip\Resource\BankAccount;
 use Moip\Resource\Customer;
@@ -75,7 +77,7 @@ class Moip
      * Create a new aurhentication with the endpoint.
      *
      * @param \Moip\Auth\MoipAuthentication $moipAuthentication
-     * @param string                        $endpoint
+     * @param string $endpoint
      */
     public function __construct(Authentication $moipAuthentication, $endpoint = self::ENDPOINT_PRODUCTION)
     {
@@ -88,7 +90,7 @@ class Moip
      * Creates a new Request_Session with all the default values.
      * A Session is created at construction.
      *
-     * @param float $timeout         How long should we wait for a response?(seconds with a millisecond precision, default: 30, example: 0.01).
+     * @param float $timeout How long should we wait for a response?(seconds with a millisecond precision, default: 30, example: 0.01).
      * @param float $connect_timeout How long should we wait while trying to connect? (seconds with a millisecond precision, default: 10, example: 0.01)
      */
     public function createNewSession($timeout = 30.0, $connect_timeout = 30.0)
@@ -206,6 +208,26 @@ class Moip
     public function transfers()
     {
         return new Transfers($this);
+    }
+
+    /**
+     * Create a new Anticipations instance.
+     *
+     * @return Anticipations
+     */
+    public function anticipations()
+    {
+        return new Anticipations($this);
+    }
+
+    /**
+     * Create a new AnticipationEstimates instance.
+     *
+     * @return AnticipationEstimates
+     */
+    public function anticipationEstimates()
+    {
+        return new AnticipationEstimates($this);
     }
 
     /**
