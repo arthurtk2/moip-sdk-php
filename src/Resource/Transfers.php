@@ -25,6 +25,11 @@ class Transfers extends MoipResource
     /**
      * @const string
      */
+    const MOIP_ACCOUNT_METHOD = 'MOIP_ACCOUNT';
+
+    /**
+     * @const string
+     */
     const TYPE = 'CHECKING';
 
     /**
@@ -128,6 +133,23 @@ class Transfers extends MoipResource
         $this->data->amount = $amount;
         $this->data->transferInstrument->method = self::METHOD;
         $this->data->transferInstrument->bankAccount->id = $bankAccountId;
+
+        return $this;
+    }
+
+    /**
+     * Set info of transfers to a saved moip account.
+     *
+     * @param int    $amount        Amount
+     * @param string $moipAccountId Saved moip account id.
+     *
+     * @return $this
+     */
+    public function setTransfersToMoipAccount($amount, $moipAccountId)
+    {
+        $this->data->amount = $amount;
+        $this->data->transferInstrument->method = self::MOIP_ACCOUNT_METHOD;
+        $this->data->transferInstrument->moipAccount->id = $moipAccountId;
 
         return $this;
     }
