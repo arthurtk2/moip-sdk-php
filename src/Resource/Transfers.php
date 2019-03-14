@@ -186,10 +186,10 @@ class Transfers extends MoipResource
      *
      * @return $this
      */
-    public function setHolder($fullname, $taxDocument)
+    public function setHolder($fullname, $taxDocument, $documentType = self::TYPE_HOLD)
     {
         $this->data->transferInstrument->bankAccount->holder->fullname = $fullname;
-        $this->data->transferInstrument->bankAccount->holder->taxDocument->type = self::TYPE_HOLD;
+        $this->data->transferInstrument->bankAccount->holder->taxDocument->type = $documentType;
         $this->data->transferInstrument->bankAccount->holder->taxDocument->number = $taxDocument;
 
         return $this;
