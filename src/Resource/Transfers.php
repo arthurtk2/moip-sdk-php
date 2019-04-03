@@ -95,7 +95,6 @@ class Transfers extends MoipResource
      * @param string $bankNumber         Bank number. possible values: 001, 237, 341, 041.
      * @param int    $agencyNumber
      * @param int    $agencyCheckNumber
-     * @param int    $accountType
      * @param int    $accountNumber
      * @param int    $accountCheckNumber
      *
@@ -106,7 +105,7 @@ class Transfers extends MoipResource
         $bankNumber,
         $agencyNumber,
         $agencyCheckNumber,
-        $accountType,
+        $accountType = self::TYPE,
         $accountNumber,
         $accountCheckNumber
     ) {
