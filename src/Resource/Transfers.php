@@ -95,6 +95,7 @@ class Transfers extends MoipResource
      * @param string $bankNumber         Bank number. possible values: 001, 237, 341, 041.
      * @param int    $agencyNumber
      * @param int    $agencyCheckNumber
+     * @param int    $accountType
      * @param int    $accountNumber
      * @param int    $accountCheckNumber
      *
@@ -105,12 +106,13 @@ class Transfers extends MoipResource
         $bankNumber,
         $agencyNumber,
         $agencyCheckNumber,
+        $accountType,
         $accountNumber,
         $accountCheckNumber
     ) {
         $this->data->amount = $amount;
         $this->data->transferInstrument->method = self::METHOD;
-        $this->data->transferInstrument->bankAccount->type = self::TYPE;
+        $this->data->transferInstrument->bankAccount->type = $accountType;
         $this->data->transferInstrument->bankAccount->bankNumber = $bankNumber;
         $this->data->transferInstrument->bankAccount->agencyNumber = $agencyNumber;
         $this->data->transferInstrument->bankAccount->agencyCheckNumber = $agencyCheckNumber;
