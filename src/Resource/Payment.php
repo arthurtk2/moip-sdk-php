@@ -190,6 +190,7 @@ class Payment extends MoipResource
         $payment->data->installmentCount = $this->getIfSet('installmentCount', $response);
         $payment->data->fundingInstrument = $this->getIfSet('fundingInstrument', $response);
         $payment->data->payments = $this->getIfSet('payments', $response);
+        $payment->data->receivers = $this->getIfSet('receivers', $response);
         $payment->data->escrows = $this->getIfSet('escrows', $response);
         $payment->data->fees = $this->getIfSet('fees', $response);
         $payment->data->refunds = $this->getIfSet('refunds', $response);
@@ -359,6 +360,16 @@ class Payment extends MoipResource
     public function getPayments()
     {
         return $this->getIfSet('payments');
+    }
+
+    /**
+     * Get receivers.
+     *
+     * @return array
+     */
+    public function getReceivers()
+    {
+        return $this->getIfSet('receivers');
     }
 
     /**
