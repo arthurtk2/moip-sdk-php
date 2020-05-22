@@ -191,6 +191,8 @@ class Payment extends MoipResource
         $payment->data->fundingInstrument = $this->getIfSet('fundingInstrument', $response);
         $payment->data->payments = $this->getIfSet('payments', $response);
         $payment->data->receivers = $this->getIfSet('receivers', $response);
+        $payment->data->cancellationDetails = $this->getIfSet('cancellationDetails', $response);
+        $payment->data->events = $this->getIfSet('events', $response);
         $payment->data->escrows = $this->getIfSet('escrows', $response);
         $payment->data->fees = $this->getIfSet('fees', $response);
         $payment->data->refunds = $this->getIfSet('refunds', $response);
@@ -372,6 +374,15 @@ class Payment extends MoipResource
         return $this->getIfSet('receivers');
     }
 
+    public function getCancellationDetails()
+    {
+        return $this->getIfSet('cancellationDetails');
+    }
+
+    public function getEvents()
+    {
+        return $this->getIfSet('events');
+    }
     /**
      * Set means of payment.
      *
