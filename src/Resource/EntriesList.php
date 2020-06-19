@@ -2,30 +2,45 @@
 
 namespace Moip\Resource;
 
-use Moip\Helper\Filters;
-use Moip\Helper\Pagination;
 use stdClass;
 
 class EntriesList extends MoipResource
 {
     /**
-     * Path bank accounts API.
-     *
      * @const string
      */
     const PATH = 'entries';
 
-    /**
-     * Initialize a new instance.
-     */
     public function initialize()
     {
         $this->data = new stdClass();
-        $this->data->transfers = [];
+        $this->data->summary = new stdClass();
+        $this->data->_links = new stdClass();
+        $this->data->entries = [];
     }
 
     /**
-     * Get transfers.
+     * Get summary.
+     *
+     * @return stdClass
+     */
+    public function getSummary()
+    {
+        return $this->getIfSet('summary');
+    }
+
+    /**
+     * Get _links.
+     *
+     * @return stdClass
+     */
+    public function getLinks()
+    {
+        return $this->getIfSet('_links');
+    }
+
+    /**
+     * Get entries.
      *
      * @return array
      */
@@ -35,30 +50,32 @@ class EntriesList extends MoipResource
     }
 
     /**
-     * Get entries list.
-     *
-     * @param Pagination $pagination
-     * @param Filters $filters
-     * @param string $qParam Query a specific value.
+     * Get a entries list.
      *
      * @return stdClass
      */
-    public function get(Pagination $pagination = null, Filters $filters = null, $qParam = '')
+    public function get()
     {
-        $headers['Accept'] = 'application/json;version=2.1';
+        $path = sprintf('/%s/%s', MoipResource::VERSION, self::PATH);
 
-        return $this->getByPath($this->generateListPath($pagination, $filters, ['q' => $qParam]), $headers);
+        return $this->getByPath($path, ['Accept' => static::ACCEPT_VERSION]);
     }
 
     protected function populate(stdClass $response)
     {
         $entriesList = clone $this;
-        $entriesList->data = new stdClass();
+
+        $entriesList->data->summary->amount = $response->summary->amount;
+
+        $entriesList->data->summary->count = $response->summary->count;
+
+        $entriesList->data->_links->previous = new stdClass();
+        $entriesList->data->_links->previous->href = $response->_links->previous->href;
+
+        $entriesList->data->_links->next = new stdClass();
+        $entriesList->data->_links->next->href = $response->_links->next->href;
 
         $entriesList->data->entries = $response->entries;
-
-        $entriesList->data->summary = $response->summary;
-        $entriesList->_links = $response->_links;
 
         return $entriesList;
     }

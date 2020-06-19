@@ -245,6 +245,16 @@ class Customer extends MoipResource
     }
 
     /**
+     * Get funding instruments from customer.
+     *
+     * @return array FundingInstruments.
+     */
+    public function getFundingInstruments()
+    {
+        return $this->getIfSet('fundingInstruments');
+    }
+
+    /**
      * Mount the buyer structure from customer.
      *
      * @param \stdClass $response
@@ -274,6 +284,7 @@ class Customer extends MoipResource
         $customer->data->shippingAddress = $this->getIfSet('shippingAddress', $response);
         $customer->data->billingAddress = $this->getIfSet('billingAddress', $response);
         $customer->data->fundingInstrument = $this->getIfSet('fundingInstrument', $response);
+        $customer->data->fundingInstruments = $this->getIfSet('fundingInstruments', $response);
 
         $customer->data->_links = $this->getIfSet('_links', $response);
 

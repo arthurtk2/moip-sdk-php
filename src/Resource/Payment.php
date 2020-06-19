@@ -325,6 +325,16 @@ class Payment extends MoipResource
     }
 
     /**
+     * Returns delay capture.
+     *
+     * @return stdClass
+     */
+    public function getDelayCapture()
+    {
+        return $this->data->delayCapture;
+    }
+
+    /**
      * Returns escrow.
      *
      * @return stdClass
@@ -605,9 +615,9 @@ class Payment extends MoipResource
      *
      * @return $this
      */
-    public function setDelayCapture()
+    public function setDelayCapture($delayCapture = true)
     {
-        $this->data->delayCapture = true;
+        $this->data->delayCapture = $delayCapture;
 
         return $this;
     }
