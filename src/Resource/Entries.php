@@ -66,15 +66,15 @@ class Entries extends MoipResource
     }
 
     /**
-     * Create a new Entries list instance.
+     * Create a new Entries List instance.
      *
      * @return \Moip\Resource\EntriesList
      */
-    public function getList(Pagination $pagination = null, Filters $filters = null, $qParam = '')
+    public function getList()
     {
         $entriesList = new EntriesList($this->moip);
 
-        return $entriesList->get($pagination, $filters, $qParam);
+        return $entriesList->get();
     }
 
     /**
@@ -99,18 +99,6 @@ class Entries extends MoipResource
     public function getData()
     {
         return $this->data;
-    }
-
-    /**
-     * Create a new Entries List instance.
-     *
-     * @return \Moip\Resource\EntriesList
-     */
-    public function getList()
-    {
-        $entriesList = new EntriesList($this->moip);
-
-        return $entriesList->get();
     }
 
     /**
