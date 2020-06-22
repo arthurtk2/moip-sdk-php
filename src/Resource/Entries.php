@@ -37,8 +37,13 @@ class Entries extends MoipResource
         $entry = clone $this;
 
         $entry->data->id = $this->getIfSet('id', $response);
+        $entry->data->event = $this->getIfSet('event', $response);
         $entry->data->status = $this->getIfSet('status', $response);
         $entry->data->operation = $this->getIfSet('operation', $response);
+        $entry->data->description = $this->getIfSet('description', $response);
+        $entry->data->scheduledFor = $this->getIfSet('scheduledFor', $response);
+        $entry->data->updatedAt = $this->getIfSet('updatedAt', $response);
+        $entry->data->createdAt = $this->getIfSet('createdAt', $response);
 
         if (isset($response->_links)) {
             $entry->data->_links = $response->_links;
