@@ -117,6 +117,26 @@ class Entries extends MoipResource
     }
 
     /**
+     * Get event from entry.
+     *
+     * @return string Entry event that generated the launch.
+     */
+    public function getEvent()
+    {
+        return $this->getIfSet('event');
+    }
+
+    /**
+     * Get description from entry.
+     *
+     * @return string Entry description that generated the launch.
+     */
+    public function getDescription()
+    {
+        return $this->getIfSet('description');
+    }
+
+    /**
      * Get status from entry.
      *
      * @return string Launch status. Possible values: SCHEDULED, SETTLED.
