@@ -10,6 +10,7 @@ use Moip\Resource\Balances;
 use Moip\Resource\BankAccount;
 use Moip\Resource\Customer;
 use Moip\Resource\Entries;
+use Moip\Resource\FutureStatements;
 use Moip\Resource\Holder;
 use Moip\Resource\Keys;
 use Moip\Resource\Multiorders;
@@ -17,6 +18,7 @@ use Moip\Resource\NotificationPreferences;
 use Moip\Resource\Orders;
 use Moip\Resource\Payment;
 use Moip\Resource\Refund;
+use Moip\Resource\Statements;
 use Moip\Resource\Transfers;
 use Moip\Resource\WebhookList;
 use Requests_Session;
@@ -228,6 +230,26 @@ class Moip
     public function anticipationEstimates()
     {
         return new AnticipationEstimates($this);
+    }
+
+    /**
+     * Create a new Statements instance.
+     *
+     * @return \Moip\Resource\Statements
+     */
+    public function statements()
+    {
+        return new Statements($this);
+    }
+
+    /**
+     * Create a new Future Statements instance.
+     *
+     * @return \Moip\Resource\FutureStatements
+     */
+    public function futureStatements()
+    {
+        return new FutureStatements($this);
     }
 
     /**
