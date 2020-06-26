@@ -12,7 +12,7 @@ class FutureStatements extends MoipResource
     /**
      * @const string
      */
-    const PATH = 'statements/details';
+    const PATH = 'futurestatements/details';
 
     /**
      * Initializes new instances.
@@ -61,9 +61,9 @@ class FutureStatements extends MoipResource
      */
     public function getList($initialDate, $finalDate)
     {
-        $statementsList = new StatementsList($this->moip);
+        $futurestatementsList = new FutureStatementsList($this->moip);
 
-        return $statementsList->get($initialDate, $finalDate);
+        return $futurestatementsList->get($initialDate, $finalDate);
     }
 
     /**
