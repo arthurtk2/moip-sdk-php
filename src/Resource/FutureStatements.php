@@ -52,9 +52,12 @@ class FutureStatements extends MoipResource
     }
 
     /**
-     * Create a new Statements list instance.
+     * Create a new Future Statements list instance.
      *
-     * @return \Moip\Resource\StatementsList
+     * @param $initialDate => Data de início de exibição no formato YYYY-MM-DD
+     * @param $finalDate => Data de fim de exibição no formato YYYY-MM-DD
+     *
+     * @return \Moip\Resource\FutureStatementsList
      */
     public function getList($initialDate, $finalDate)
     {

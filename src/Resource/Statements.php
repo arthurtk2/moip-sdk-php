@@ -54,6 +54,9 @@ class Statements extends MoipResource
     /**
      * Create a new Statements list instance.
      *
+     * @param $initialDate => Data de início de exibição no formato YYYY-MM-DD
+     * @param $finalDate => Data de fim de exibição no formato YYYY-MM-DD
+     *
      * @return \Moip\Resource\StatementsList
      */
     public function getList($initialDate, $finalDate)
@@ -68,6 +71,7 @@ class Statements extends MoipResource
      *
      * @param $type  => Tipo do extrato, disponível na tabela de tipos de lançamentos (https://dev.wirecard.com.br/reference#tipos-de-lan%C3%A7amentos)
      * @param $date => Data para visualizar os detalhes no formato YYYY-MM-DD
+     *
      * @return stdClass
      */
     public function get($type, $date)
