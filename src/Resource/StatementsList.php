@@ -58,6 +58,6 @@ class StatementsList extends MoipResource
 
     public function getSummary()
     {
-        return $this->data->days;
+        return $this->data->summary;
     }
 }
