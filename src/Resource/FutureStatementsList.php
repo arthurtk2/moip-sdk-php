@@ -1,6 +1,7 @@
 <?php
 
 namespace Moip\Resource;
+
 use stdClass;
 
 class FutureStatementsList extends MoipResource
@@ -43,5 +44,20 @@ class FutureStatementsList extends MoipResource
         $statementsList->data->summary = $response->summary;
 
         return $statementsList;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function getDays()
+    {
+        return $this->data->days;
+    }
+
+    public function getSummary()
+    {
+        return $this->data->days;
     }
 }

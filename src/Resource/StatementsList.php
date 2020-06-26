@@ -45,4 +45,19 @@ class StatementsList extends MoipResource
 
         return $statementsList;
     }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function getDays()
+    {
+        return $this->data->days;
+    }
+
+    public function getSummary()
+    {
+        return $this->data->days;
+    }
 }
