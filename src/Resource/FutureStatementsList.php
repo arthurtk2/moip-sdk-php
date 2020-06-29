@@ -40,7 +40,7 @@ class FutureStatementsList extends MoipResource
         $statementsList = clone $this;
         $statementsList->data = new stdClass();
 
-        $statementsList->data->days = $response->days;
+        $statementsList->data->lines = $response->lines;
         $statementsList->data->summary = $response->summary;
 
         return $statementsList;
@@ -51,9 +51,9 @@ class FutureStatementsList extends MoipResource
         return $this->data;
     }
 
-    public function getDays()
+    public function getLines()
     {
-        return $this->data->days;
+        return $this->data->lines;
     }
 
     public function getSummary()
