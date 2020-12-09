@@ -155,6 +155,13 @@ class Connect implements Authentication, JsonSerializable
     private $code;
 
     /**
+     * Extra params for url
+     *
+     * @var array
+     */
+    private $params = [];
+
+    /**
      * Connect constructor.
      *
      * @param string     $redirect_uri
@@ -217,12 +224,18 @@ class Connect implements Authentication, JsonSerializable
         }
         $query_string = [
             'response_type' => self::RESPONSE_TYPE,
-            'client_id'     => $this->client_id,
-            'redirect_uri'  => $this->redirect_uri,
-            'scope'         => implode(',', $this->scope),
+            'client_id' => $this->client_id,
+            'redirect_uri' => $this->redirect_uri,
+            'scope' => implode(',', $this->scope),
         ];
 
-        return $this->endpoint.self::OAUTH_AUTHORIZE.'?'.http_build_query($query_string);
+        if (!empty($this->params)) {
+            foreach ($this->params as $key => $param) {
+                $query_string[$key] = $param;
+            }
+        }
+
+        return $this->endpoint . self::OAUTH_AUTHORIZE . '?' . http_build_query($query_string);
     }
 
     /**
@@ -232,14 +245,14 @@ class Connect implements Authentication, JsonSerializable
      */
     public function authorize()
     {
-        $path = $this->endpoint.self::OAUTH_TOKEN;
+        $path = $this->endpoint . self::OAUTH_TOKEN;
         $headers = ['Content-Type' => 'application/x-www-form-urlencoded'];
         $body = [
-            'client_id'     => $this->client_id,
+            'client_id' => $this->client_id,
             'client_secret' => $this->client_secret,
-            'grant_type'    => self::GRANT_TYPE,
-            'code'          => $this->code,
-            'redirect_uri'  => $this->redirect_uri,
+            'grant_type' => self::GRANT_TYPE,
+            'code' => $this->code,
+            'redirect_uri' => $this->redirect_uri,
         ];
 
         try {
@@ -265,7 +278,7 @@ class Connect implements Authentication, JsonSerializable
     public function setScodeAll($scope)
     {
         if (!is_bool($scope)) {
-            throw new InvalidArgumentException('$scope deve ser boolean, foi passado '.gettype($scope));
+            throw new InvalidArgumentException('$scope deve ser boolean, foi passado ' . gettype($scope));
         }
 
         if ($scope === false) {
@@ -288,14 +301,14 @@ class Connect implements Authentication, JsonSerializable
      *
      * @param bool $receive_funds
      *
+     * @return \Moip\Auth\Connect $this
      * @throws \Moip\Exceptions\InvalidArgumentException
      *
-     * @return \Moip\Auth\Connect $this
      */
     public function setReceiveFunds($receive_funds)
     {
         if (!is_bool($receive_funds)) {
-            throw new InvalidArgumentException('$receive_funds deve ser boolean, foi passado '.gettype($receive_funds));
+            throw new InvalidArgumentException('$receive_funds deve ser boolean, foi passado ' . gettype($receive_funds));
         }
 
         if ($receive_funds === true) {
@@ -310,14 +323,14 @@ class Connect implements Authentication, JsonSerializable
      *
      * @param bool $refund
      *
+     * @return \Moip\Auth\Connect $this
      * @throws \Moip\Exceptions\InvalidArgumentException
      *
-     * @return \Moip\Auth\Connect $this
      */
     public function setRefund($refund)
     {
         if (!is_bool($refund)) {
-            throw new InvalidArgumentException('$refund deve ser boolean, foi passado '.gettype($refund));
+            throw new InvalidArgumentException('$refund deve ser boolean, foi passado ' . gettype($refund));
         }
 
         if ($refund === true) {
@@ -332,14 +345,14 @@ class Connect implements Authentication, JsonSerializable
      *
      * @param bool $manage_account_info
      *
+     * @return \Moip\Auth\Connect $this
      * @throws \Moip\Exceptions\InvalidArgumentException
      *
-     * @return \Moip\Auth\Connect $this
      */
     public function setManageAccountInfo($manage_account_info)
     {
         if (!is_bool($manage_account_info)) {
-            throw new InvalidArgumentException('$manage_account_info deve ser boolean, foi passado '.gettype($manage_account_info));
+            throw new InvalidArgumentException('$manage_account_info deve ser boolean, foi passado ' . gettype($manage_account_info));
         }
 
         if ($manage_account_info === true) {
@@ -354,14 +367,14 @@ class Connect implements Authentication, JsonSerializable
      *
      * @param bool $retrieve_financial_info
      *
+     * @return \Moip\Auth\Connect $this
      * @throws \Moip\Exceptions\InvalidArgumentException
      *
-     * @return \Moip\Auth\Connect $this
      */
     public function setRetrieveFinancialInfo($retrieve_financial_info)
     {
         if (!is_bool($retrieve_financial_info)) {
-            throw new InvalidArgumentException('$retrieve_financial_info deve ser boolean, foi passado '.gettype($retrieve_financial_info));
+            throw new InvalidArgumentException('$retrieve_financial_info deve ser boolean, foi passado ' . gettype($retrieve_financial_info));
         }
 
         if ($retrieve_financial_info === true) {
@@ -376,14 +389,14 @@ class Connect implements Authentication, JsonSerializable
      *
      * @param bool $transfer_funds
      *
+     * @return \Moip\Auth\Connect $this
      * @throws \Moip\Exceptions\InvalidArgumentException
      *
-     * @return \Moip\Auth\Connect $this
      */
     public function setTransferFunds($transfer_funds)
     {
         if (!is_bool($transfer_funds)) {
-            throw new InvalidArgumentException('$transfer_funds deve ser boolean, foi passado '.gettype($transfer_funds));
+            throw new InvalidArgumentException('$transfer_funds deve ser boolean, foi passado ' . gettype($transfer_funds));
         }
 
         if ($transfer_funds === true) {
@@ -398,14 +411,14 @@ class Connect implements Authentication, JsonSerializable
      *
      * @param bool $define_preferences
      *
+     * @return $this
      * @throws \Moip\Exceptions\InvalidArgumentException
      *
-     * @return $this
      */
     public function setDefinePreferences($define_preferences)
     {
         if (!is_bool($define_preferences)) {
-            throw new InvalidArgumentException('$define_preferences deve ser boolean, foi passado '.gettype($define_preferences));
+            throw new InvalidArgumentException('$define_preferences deve ser boolean, foi passado ' . gettype($define_preferences));
         }
 
         if ($define_preferences === true) {
@@ -552,15 +565,36 @@ class Connect implements Authentication, JsonSerializable
     }
 
     /**
+     * @param $params array
+     *
+     * @return $this
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
      * Register hooks as needed.
      *
      * This method is called in {@see Requests::request} when the user has set
      * an instance as the 'auth' option. Use this callback to register all the
      * hooks you'll need.
      *
+     * @param Requests_Hooks $hooks Hook system
+     *
      * @see Requests_Hooks::register
      *
-     * @param Requests_Hooks $hooks Hook system
      */
     public function register(Requests_Hooks &$hooks)
     {
@@ -570,7 +604,7 @@ class Connect implements Authentication, JsonSerializable
     /**
      * Specify data which should be serialized to JSON.
      *
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
      *
      * @return mixed data which can be serialized by <b>json_encode</b>,
      *               which is a value of any type other than a resource.
